@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Diseña tu torta en 3D | Pastelería Mishky</title>
+
+    <meta name="description" content="Personaliza una torta en 3D, combina sabores y decoraciones y calcula un precio estimado en Pastelería Mishky.">
+
+    <link rel="icon" href="img/favicon.png" type="image/png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="stylesheet" href="css/personalizador.css">
+    <link rel="stylesheet" href="css/carrito-pro.css">
+    <link rel="stylesheet" href="css/responsive-fixes.css">
+</head>
+<body class="pagina-disenador">
+    <header class="cabecera">
+        <div class="contenedor cabecera__fila">
+            <a href="catalogo.html" class="marca" aria-label="Pastelería Mishky, inicio">
+                <img src="img/logo.png" alt="Pastelería Mishky" width="176" height="52">
+            </a>
+            <nav aria-label="Principal">
+                <ul class="menu">
+                    <li><a href="catalogo.html">Inicio</a></li>
+                    <li><a href="catalogo.html#catalogo">Catálogo</a></li>
+                    <li><a href="catalogo.html#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+            <button type="button" id="abrir-carrito" class="carrito-abrir" aria-haspopup="dialog" aria-controls="modal-carrito">
+                🛒 Carrito (<span id="carrito-contador">0</span>)
+            </button>
+        </div>
+    </header>
+    <main>
+    <section id="personalizador" class="personalizador-seccion">
+        <div class="contenedor">
+            <header class="personalizador-intro">
+                <p class="personalizador-eyebrow">Una creación a tu gusto</p>
+                <h2>Diseña tu torta en 3D</h2>
+                <p>Combina pisos, sabores, cobertura y detalles. Gira tu creación para verla desde distintos ángulos y conoce su precio estimado al instante.</p>
+            </header>
+
+            <div class="personalizador-layout">
+                <div class="personalizador-panel">
+                    <section class="config-card">
+                        <div class="config-card__heading">
+                            <span class="config-step">01</span>
+                            <div>
+                                <h3>La estructura</h3>
+                                <p>Elige la forma y las medidas de cada piso.</p>
+                            </div>
+                        </div>
+
+                        <div class="config-grid config-grid--two">
+                            <div class="config-field">
+                                <label for="forma-torta">Forma de la torta</label>
+                                <select id="forma-torta">
+                                    <option value="redonda">Redonda</option>
+                                    <option value="cuadrada">Cuadrada</option>
+                                </select>
+                            </div>
+                            <div class="config-field">
+                                <label for="cantidad-pisos">Cantidad de pisos</label>
+                                <select id="cantidad-pisos">
+                                    <option value="1">1 piso</option>
+                                    <option value="2" selected>2 pisos</option>
+                                    <option value="3">3 pisos</option>
+                                    <option value="4">4 pisos</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="pisos-controles" class="pisos-controles" aria-live="polite"></div>
+                        <p class="config-hint">Medidas en centímetros. Los pisos superiores deben ser progresivamente más pequeños.</p>
+                    </section>
+
+                    <section class="config-card">
+                        <div class="config-card__heading">
+                            <span class="config-step">02</span>
+                            <div>
+                                <h3>El sabor</h3>
+                                <p>Elige el bizcocho y la textura del relleno.</p>
+                            </div>
+                        </div>
+
+                        <div class="config-grid config-grid--two">
+                            <div class="config-field">
+                                <label for="sabor-bizcocho">Sabor de bizcocho</label>
+                                <select id="sabor-bizcocho">
+                                    <option value="vainilla">Vainilla clásica</option>
+                                    <option value="chocolate" selected>Chocolate</option>
+                                    <option value="redvelvet">Red velvet</option>
+                                    <option value="lucuma">Lúcuma</option>
+                                </select>
+                            </div>
+                            <div class="config-field">
+                                <label for="tipo-relleno">Tipo de relleno</label>
+                                <select id="tipo-relleno">
+                                    <option value="suave">Suave · ligero</option>
+                                    <option value="mousse" selected>Mousse · aireado</option>
+                                    <option value="firme">Firme · mayor soporte</option>
+                                </select>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="config-card">
+                        <div class="config-card__heading">
+                            <span class="config-step">03</span>
+                            <div>
+                                <h3>La cobertura</h3>
+                                <p>Selecciona un tono de la paleta o crea el tuyo.</p>
+                            </div>
+                        </div>
+
+                        <div id="paleta-colores" class="paleta-colores" aria-label="Colores sugeridos">
+                            <button type="button" class="color-swatch is-selected" data-color="#e8b8a8" style="--swatch:#e8b8a8" aria-label="Rosa empolvado" aria-pressed="true"></button>
+                            <button type="button" class="color-swatch" data-color="#f4dfbd" style="--swatch:#f4dfbd" aria-label="Vainilla" aria-pressed="false"></button>
+                            <button type="button" class="color-swatch" data-color="#8c4b3d" style="--swatch:#8c4b3d" aria-label="Cacao" aria-pressed="false"></button>
+                            <button type="button" class="color-swatch" data-color="#d98d91" style="--swatch:#d98d91" aria-label="Rosa antiguo" aria-pressed="false"></button>
+                            <button type="button" class="color-swatch" data-color="#a9b99a" style="--swatch:#a9b99a" aria-label="Salvia" aria-pressed="false"></button>
+                            <button type="button" class="color-swatch" data-color="#9eb8c5" style="--swatch:#9eb8c5" aria-label="Azul pastel" aria-pressed="false"></button>
+                            <button type="button" class="color-swatch" data-color="#b9a1c9" style="--swatch:#b9a1c9" aria-label="Lavanda" aria-pressed="false"></button>
+                            <label class="color-libre" for="color-cobertura">
+                                <input type="color" id="color-cobertura" value="#e8b8a8" aria-label="Elegir otro color">
+                                <span>Color libre</span>
+                            </label>
+                        </div>
+                    </section>
+
+                    <section class="config-card">
+                        <div class="config-card__heading">
+                            <span class="config-step">04</span>
+                            <div>
+                                <h3>Los detalles finales</h3>
+                                <p>Añade decoraciones a la parte superior.</p>
+                            </div>
+                        </div>
+
+                        <div id="decoraciones-torta" class="decoraciones-grid">
+                            <label class="decoracion-option"><input type="checkbox" name="decoracion" value="frutas" checked><span class="decoracion-icon">🍓</span><span><strong>Frutas frescas</strong><small>Toque natural</small></span></label>
+                            <label class="decoracion-option"><input type="checkbox" name="decoracion" value="chispas" checked><span class="decoracion-icon">✨</span><span><strong>Chispas</strong><small>Color y alegría</small></span></label>
+                            <label class="decoracion-option"><input type="checkbox" name="decoracion" value="velas"><span class="decoracion-icon">🕯️</span><span><strong>Velas</strong><small>Para celebrar</small></span></label>
+                            <label class="decoracion-option"><input type="checkbox" name="decoracion" value="chocolate"><span class="decoracion-icon">🍫</span><span><strong>Drip de chocolate</strong><small>Acabado especial</small></span></label>
+                            <label class="decoracion-option"><input type="checkbox" name="decoracion" value="perlas"><span class="decoracion-icon">🤍</span><span><strong>Perlas de azúcar</strong><small>Detalle delicado</small></span></label>
+                        </div>
+                    </section>
+
+                    <section class="presets-card">
+                        <div>
+                            <span class="presets-eyebrow">Tu colección</span>
+                            <h3>Guardar mi diseño</h3>
+                            <p>Conserva tus combinaciones en este navegador para seguir editándolas luego.</p>
+                        </div>
+                        <label class="sr-only" for="nombre-preset">Nombre del diseño</label>
+                        <input id="nombre-preset" type="text" maxlength="40" placeholder="Ej. Torta de cumpleaños">
+                        <button type="button" id="guardar-preset" class="boton-secundario">Guardar diseño</button>
+                        <div class="presets-load">
+                            <label class="sr-only" for="lista-presets">Diseños guardados</label>
+                            <select id="lista-presets"><option value="">Todavía no tienes diseños guardados</option></select>
+                            <button type="button" id="cargar-preset" class="boton-icono" disabled>Cargar</button>
+                            <button type="button" id="eliminar-preset" class="boton-icono boton-icono--delete" disabled aria-label="Eliminar preset seleccionado">×</button>
+                        </div>
+                    </section>
+                </div>
+
+                <aside class="personalizador-preview-column">
+                    <section class="preview-card">
+                        <div class="preview-card__top">
+                            <div>
+                                <span class="preview-eyebrow">Vista previa</span>
+                                <h3>Tu creación</h3>
+                            </div>
+                            <span class="preview-live"><i></i> En vivo</span>
+                        </div>
+
+                        <div id="pastel-3d" class="pastel-3d">
+                            <div class="pastel-3d-loading"><span>🎂</span><p>Preparando tu torta...</p></div>
+                        </div>
+                        <div class="preview-controls">
+                            <span>↔ Arrastra para girar</span>
+                            <div class="preview-controls__actions">
+                                <button type="button" id="reiniciar-vista-3d">Reiniciar vista</button>
+                                <button type="button" id="restablecer-torta" class="preview-reset-design">Restablecer torta</button>
+                            </div>
+                        </div>
+
+                        <div id="estado-estabilidad" class="estado-estabilidad is-stable" role="status" aria-live="polite">
+                            <strong>Diseño estable</strong>
+                            <span>Las proporciones cumplen las reglas de estabilidad configuradas.</span>
+                        </div>
+
+                        <div class="precio-torta-box">
+                            <div>
+                                <span class="precio-torta-label">Precio estimado</span>
+                                <strong id="precio-torta">S/ 0.00</strong>
+                                <small id="precio-detalle">Calculando...</small>
+                            </div>
+                            <span class="precio-torta-icon">S/</span>
+                        </div>
+
+                        <button type="button" id="agregar-torta-carrito" class="boton-agregar-torta">Añadir al carrito</button>
+                        <button type="button" id="consultar-whatsapp" class="boton-whatsapp-torta"><span aria-hidden="true">◉</span> Consultar por WhatsApp</button>
+                        <p class="preview-legal">El diseño no se agrega automáticamente. Pulsa “Añadir al carrito” cuando estés conforme. Precio referencial sujeto a confirmación de la pastelería.</p>
+                    </section>
+
+                    <div class="preview-note">
+                        <span aria-hidden="true">✦</span>
+                        <p>La estabilidad se comprueba con reglas orientativas de proporción y soporte. El armado final y el transporte deben ser confirmados por nuestro equipo.</p>
+                    </div>
+                </aside>
+            </div>
+            <p id="personalizador-aviso" class="personalizador-aviso" role="status" aria-live="polite" hidden></p>
+        </div>
+    </section>
+    </main>
+    <footer id="contacto" class="pie">
+        <div class="contenedor">
+            <p><strong>Pastelería Mishky</strong> · Av. El Sol 845, Cusco · Pedidos: 984 000 111</p>
+            <p>&copy; 2026 · Proyecto académico · Desarrollo Web I</p>
+        </div>
+    </footer>
+    <!-- BOTON FLOTANTE DE LA RULETA -->
+
+    <button
+        type="button"
+        id="abrir-ruleta"
+        class="ruleta-flotante"
+        aria-haspopup="dialog"
+        aria-controls="modal-ruleta"
+    >
+        🎁 Gira y gana un cupón
+    </button>
+
+    <!-- VENTANA DE LA RULETA -->
+
+    <dialog id="modal-ruleta" class="ruleta-dialog" aria-labelledby="ruleta-titulo">
+
+        <div class="ruleta-dialog__contenido">
+
+            <button
+                type="button"
+                id="cerrar-ruleta"
+                class="ruleta-dialog__cerrar"
+                aria-label="Cerrar ruleta"
+            >
+                ×
+            </button>
+
+            <p class="ruleta-etiqueta">Pastelería Mishky</p>
+
+            <h2 id="ruleta-titulo">¡Gira y gana un cupón!</h2>
+
+            <p class="ruleta-intro">
+                Tienes una oportunidad para conseguir un descuento especial.
+            </p>
+
+            <div class="ruleta-area">
+
+                <span class="ruleta-puntero" aria-hidden="true">▼</span>
+
+                <div
+                    id="ruleta-rueda"
+                    class="ruleta-rueda"
+                    role="img"
+                    aria-label="Ruleta con tres premios: DULCE5, MISHKY10 y ENVIOGRATIS"
+                >
+
+                    <span class="ruleta-premio ruleta-premio--dulce">
+                        DULCE5
+                    </span>
+
+                    <span class="ruleta-premio ruleta-premio--mishky">
+                        MISHKY10
+                    </span>
+
+                    <span class="ruleta-premio ruleta-premio--envio">
+                        ENVIO<br>GRATIS
+                    </span>
+
+                    <span class="ruleta-centro">
+                        MISHKY
+                    </span>
+
+                </div>
+
+            </div>
+
+            <button
+                type="button"
+                id="girar-ruleta"
+                class="ruleta-girar"
+            >
+                Girar ruleta
+            </button>
+
+            <p
+                id="ruleta-mensaje"
+                class="ruleta-mensaje"
+                role="status"
+                aria-live="polite"
+            >
+                Presiona el botón para descubrir tu premio.
+            </p>
+
+            <div id="ruleta-cupon" class="ruleta-cupon" hidden>
+
+                <p class="ruleta-cupon__titulo">
+                    Tu cupón
+                </p>
+
+                <strong
+                    id="ruleta-codigo"
+                    class="ruleta-codigo"
+                ></strong>
+
+                <p
+                    id="ruleta-descripcion"
+                    class="ruleta-cupon__descripcion"
+                ></p>
+
+                <button
+                    type="button"
+                    id="copiar-cupon"
+                    class="ruleta-copiar"
+                >
+                    Copiar código
+                </button>
+
+            </div>
+
+            <p class="ruleta-nota">
+                Guarda el código que ganes. En el carrito podrás pegarlo y decidir cuándo aplicarlo.
+            </p>
+
+        </div>
+
+    </dialog>
+
+    <dialog id="modal-carrito" class="carrito-dialog" aria-labelledby="carrito-titulo">
+        <div class="carrito-dialog__contenido">
+            <header class="carrito-header">
+                <div>
+                    <p class="carrito-etiqueta">Pastelería Mishky</p>
+                    <h2 id="carrito-titulo">Tu carrito</h2>
+                    <p id="carrito-estado" class="carrito-estado" role="status" aria-live="polite">Cargando inventario...</p>
+                </div>
+                <button type="button" id="cerrar-carrito" class="carrito-dialog__cerrar" aria-label="Cerrar carrito">×</button>
+            </header>
+
+            <div class="carrito-layout">
+                <div class="carrito-main">
+                    <section class="carrito-panel carrito-panel--items">
+                        <div class="carrito-panel__heading">
+                            <div><span class="carrito-panel__eyebrow">Tu selección</span><h3>Productos elegidos</h3></div>
+                            <span class="carrito-panel__icon">🛍️</span>
+                        </div>
+                        <div id="carrito-lista" class="carrito-lista"></div>
+                        <a class="carrito-volver" href="catalogo.html#catalogo" id="carrito-volver-catalogo">← Seguir descubriendo</a>
+                    </section>
+
+                    <section class="carrito-checkout carrito-panel">
+                        <div class="carrito-panel__heading">
+                            <div><span class="carrito-panel__eyebrow">Último paso</span><h3>Datos del pedido</h3></div>
+                            <span class="carrito-panel__icon">📦</span>
+                        </div>
+
+                        <div class="checkout-fields">
+                            <div class="checkout-field checkout-field--full">
+                                <label for="carrito-nombre">Nombre completo</label>
+                                <input type="text" id="carrito-nombre" maxlength="100" autocomplete="name" placeholder="¿Cómo te llamas?" required>
+                            </div>
+                            <div class="checkout-field">
+                                <label for="carrito-entrega">Modalidad de entrega</label>
+                                <select id="carrito-entrega">
+                                    <option value="delivery">Delivery</option>
+                                    <option value="recojo">Recojo en tienda</option>
+                                </select>
+                            </div>
+                            <div class="checkout-field">
+                                <label for="carrito-direccion">Dirección de entrega</label>
+                                <input type="text" id="carrito-direccion" maxlength="180" autocomplete="street-address" placeholder="Distrito, calle y número" required>
+                            </div>
+                        </div>
+                        <p class="carrito-envio-nota">Delivery referencial: S/ 8.00. El recojo en tienda no tiene costo de envío.</p>
+                        <button type="button" id="carrito-finalizar" class="carrito-finalizar" disabled>Abrir WhatsApp y enviar pedido <span aria-hidden="true">→</span></button>
+                    </section>
+                </div>
+
+                <aside class="carrito-side">
+                    <section class="carrito-resumen">
+                        <div class="carrito-resumen__top"><span class="carrito-panel__eyebrow">Detalle de pago</span><h3>Resumen de compra</h3></div>
+                        <div class="carrito-resumen__fila"><span>Subtotal</span><strong id="carrito-subtotal">S/ 0.00</strong></div>
+                        <div class="carrito-resumen__fila"><span>Descuento</span><strong id="carrito-descuento">− S/ 0.00</strong></div>
+                        <div class="carrito-resumen__fila"><span>Envío</span><strong id="carrito-envio">S/ 0.00</strong></div>
+                        <div class="carrito-resumen__fila carrito-resumen__total"><span>Total estimado</span><strong id="carrito-total">S/ 0.00</strong></div>
+                        <div class="carrito-cupon-box">
+                            <label for="carrito-cupon-input">¿Ganaste un cupón?</label>
+                            <div class="carrito-cupon-form">
+                                <input type="text" id="carrito-cupon-input" maxlength="24" autocomplete="off" placeholder="Pega aquí tu código">
+                                <button type="button" id="carrito-aplicar-cupon">Aplicar</button>
+                            </div>
+                            <button type="button" id="carrito-quitar-cupon" class="carrito-cupon-quitar" hidden>Quitar cupón</button>
+                            <p id="carrito-cupon-estado" class="carrito-cupon-estado" aria-live="polite">El descuento solo se aplicará cuando pegues y apliques tu cupón.</p>
+                            <p id="carrito-cupon-detalle" class="carrito-cupon-detalle" aria-live="polite"></p>
+                            <button type="button" id="carrito-ir-ruleta" class="carrito-ruleta-link">🎁 Obtener un cupón</button>
+                        </div>
+                        <div class="carrito-seguridad"><span aria-hidden="true">🔒</span><p>Tu pedido se coordina de forma segura por WhatsApp. No se realiza ningún cobro en esta página.</p></div>
+                    </section>
+                </aside>
+            </div>
+        </div>
+    </dialog>
+
+    <p id="carrito-toast" class="carrito-toast" role="status" aria-live="polite" hidden></p>
+    <script src="js/ruleta.js" defer></script>
+    <script src="js/carrito.js" defer></script>
+    <script type="module" src="js/personalizador.js"></script>
+</body>
+</html>
